@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+    <script src="js/angular.min.js"></script>
+    <script>
+        var mymodule = angular.module("Mymodule", []);
+        var myController = mymodule.controller("Mycontroller", function ($scope, $http) {
+            $http.get("/getcategory").then(fng1, fnb1);
+            function fng1(jsonRespss) {
+                alert(JSON.stringify(jsonRespss))
+                $scope.jsonarrry = jsonRespss.data;
+            }
+
+            function fnb1(jsonRespss) {
+                alert(jsonRespss);
+            }
+
+            $http.get("/geteval").then(fng, fnb);
+            function fng(jsonResps) {
+                alert(JSON.stringify(jsonResps));
+                $scope.jsonaryy = jsonResps.data;
+            }
+
+            function fnb(jsonResp) {
+                alert(jsonResp);
+            }
+
+            $scope.Dosearch = function (category1, city2) {
+                $http.get("/dofetch?Category=" + category1 + "&evaluation=" + city2).then(fngood, fnbad);
+                function fngood(jsonresp) {
+                    alert(JSON.stringify(jsonresp));
+                    $scope.arry = jsonresp.data;
+                }
+
+                function fnbad(jsonresp) {
+                    alert(JSON.stringify(jsonresp));
+                }
+            }
+
+            $scope.dosearch = function (email) {
+                $http.get("/dogetinfo?Email=" + email).then(fngo, fngb);
+                function fngo(jsonresps) {
+                    alert(JSON.stringify(jsonresps));
+                    $scope.arry = jsonresp.data;
+                }
+
+                function fngb(jsonresps) {
+                    alert(JSON.stringify(jsonresps));
+                }
+            }
+        })
+    </script>
+    <style>
+        body {
+            background-color: darkseagreen;
+        }
+
+        .main {
+            width: inherit;
+            height: 200px;
+            background-color: darkseagreen;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .sub-main1 {
+            width: 400px;
+            height: 100px;
+            margin-top: 100px;
+        }
+
+        .sub-main2 {
+            width: 400px;
+            height: 100px;
+            margin-top: 100px;
+        }
+
+        .sub-main3 {
+            width: 400px;
+            height: 100px;
+            padding-top: 30px;
+            margin-top: 100px;
+        }
+
+        .wrapper {
+            display: flex;
+            font-family: Montserrat;
+            justify-content: space-evenly;
+            width: inherit;
+            height: 100vh;
+        }
+
+        .outer {
+            position: relative;
+            background: #fff;
+            height: 350px;
+            width: 400px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .content {
+            animation-delay: 0.3s;
+            position: absolute;
+            left: 20px;
+            z-index: 3
+        }
+
+        h1 {
+            color: #111;
+        }
+
+
+        p {
+            width: 280px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #aaa;
+            margin: 20px 0;
+
+        }
+
+        .bg {
+            display: inline-block;
+            color: #fff;
+            background: cornflowerblue;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: .7em;
+        }
+
+        .button {
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+            font-size: 11px;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            /*padding: 10px 15px;*/
+            border: 1px solid #aaa;
+            background-color: black;
+            font-weight: bold;
+
+
+        }
+
+        .button :after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 0%;
+            background: #111;
+            height: 100%;
+            z-index: -1;
+            transition: width 0.3s ease-in-out;
+            transform: skew(-25deg);
+            transform-origin: right;
+        }
+
+        .button :hover:after {
+            width: 150%;
+            left: -10px;
+            transform-origin: left;
+
+        }
+
+        .button :hover {
+            color: rgb(0, 0, 0);
+            transition: all 0.5s ease;
+            background-color: rgb(209, 49, 49);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        .main2 {
+            width: inherit;
+            height: 500px;
+            display: flex;
+            flex-direction: row;
+            padding-left: 40px;
+        }
+    </style>
+</head>
+
+<body ng-app="Mymodule" ng-controller="Mycontroller">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#" style="color: white;">Shark-Tank</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse color1" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item active">
+                <a class="nav-link aa" href="pitcher.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link aa" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link aa" href="#">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link aa" href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div>
+        <center>
+            <h2>Search Pitcher </h2>
+        </center>
+    </div>
+    <div class="main">
+        <div class="sub-main1">
+            <label for="inputState"><h4>Category</h4></label>
+            <select id="inputState" class="form-control" ng-model="cate2">
+                <option selected> Select Category</option>
+                <option value="{{objf.Category}}" ng-repeat="objf in jsonarrry">{{objf.Category}}</option>
+            </select>
+        </div>
+        <div class="sub-main2">
+            <label for="inputState"><h4>Evaluation>= </h4></label>
+            <select id="inputState" class="form-control" ng-model="city2">
+                <option selected>select</option>
+                <option value="{{objeval.evaluation}}" ng-repeat="objeval in jsonaryy">{{objeval.evaluation}}</option>
+            </select>
+        </div>
+        <div class="sub-main3">
+            <button type="button" class="btn btn-dark" ng-click="Dosearch(cate2,city2)">Search</button>
+        </div>
+    </div>
+    <div class="main2">
+        <div class="wrapper" ng-repeat="objf in arry">
+            <div class="outer">
+                <div class="content animated fadeInLeft">
+                    <!-- <span class="bg animated fadeInDown">EXCLUSIVE</span> -->
+                    <h1>{{objf.name}}</h1>
+                    <p>Shadow your real allegiance to New York's Pirate radio with this cool cap featuring the Graphic
+                        Know Wave logo.</p>
+                    City :{{objf.city}}<br>
+                    Company:{{objf.company}}<br>
+                    <div class="button">
+                        <button type="submit" class="btn btn-dark" href="#" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1">View Profile</button>
+                    </div>
+
+                </div>
+                <img src="pics/idea.jpg" width="400px" height="300px"class="animated fadeInRight">
+            </div>
+            <p class="footer">Based on the Silk UI Kit - DesignModo Market</p>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" ng-repeat="objf in arry"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                Name : {{objf.name}}
+                            </div>
+                            <div class="col">
+                                E-mail : {{objf.emailid}}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                Contact : {{objf.contact}}
+                            </div>
+                            <div class="col">
+                                Address : {{objf.address}}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                City : {{objf.city}}
+                            </div>
+                            <div class="col">
+                                Occupation : {{objf.Category}}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                Established in : {{objf.estabin}}
+                            </div>
+                            <div class="col">
+                                Sales : {{objf.sales}}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                Partners : {{objf.info}}
+                            </div>
+                            <div class="col">
+                                Evaluation : {{objf.info}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                Other skills : {{objf.otherinfo}}
+                            </div>
+                            <div class="col">
+                                Adhar-Card : <img src="upload/{{objf.dhpic}}" width="50" height="50" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

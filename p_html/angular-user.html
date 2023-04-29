@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="js/angular.min.js"></script>
+    <script>
+        var mymodule = angular.module("usermodule", [])
+        var myController = mymodule.controller("usercontroller", function ($scope, $http) {
+
+            $scope.fetchdata = function () {
+                $http.get("/showuser").then(fng, fnb);
+                function fng(jsonResp) {
+                    alert(JSON.stringify(jsonResp));
+                    $scope.jsonary = jsonResp.data;
+                }
+
+                function fnb(jsonResp) {
+                    alert(jsonResp);
+                }
+            }
+
+            $scope.Doblock = function (email) {
+                alert(email);
+                $http.get("/blockuser?Email=" + email).then(fng, fnb);
+                function fng(jsonResp) {
+                    alert(JSON.stringify(jsonResp));
+                }
+                function fnb(jsonResp) {
+                    alert(jsonResp);
+                }
+            }
+
+            $scope.Doresume = function (email) {
+                $http.get("/resumeuser?Email=" + email).then(fng, fnb);
+                function fng(jsonResp) {
+                    alert(JSON.stringify(jsonResp));
+                }
+                function fnb(jsonResp) {
+                    alert(jsonResp);
+                }
+            }
+
+            $scope.Dodelete = function (email) {
+                $http.get("/deleteuser?Email=" + email).then(fng, fnb);
+                function fng(jsonResp) {
+                    alert(jsonResp);
+                }
+                function fnb(jsonResp) {
+                    alert(jsonResp);
+                }
+            }
+
+        })
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color:darkgrey;
+        }
+
+        .btn-div {
+            width: inherit;
+            height: 80px;
+
+        }
+        .heading
+        {
+            width: inherit;
+            height: 100px;
+           padding-top: 40px;
+        }
+
+        h3
+        {
+            font-size: 30px;
+            text-shadow: 0 0 3px #ffffff, 0 0 5px #0000FF;
+        }
+    </style>
+</head>
+
+<body ng-app="usermodule" ng-controller="usercontroller">
+    <div class="heading">
+    <center>
+    <h3>
+        Users Data 
+    </h3>
+   </center>
+</div>
+    <div class="btn-div">
+        <center>
+            <button class="btn btn-primary" type="submit" ng-click="fetchdata();">Showusers</button>
+        </center>
+    </div>
+    <div>
+        <table width="700px"  class="table" >
+            <tr>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>
+                    Delete
+                </th>
+                <th>
+                   Block
+                </th>
+                <th>
+                    Resume
+                </th>
+            </tr>
+            <tr ng-repeat="obju in jsonary">
+                <td>{{obju.Email}}</td>
+                <td>{{obju.Password}}</td>
+                <td>{{obju.Type}}</td>
+                <td>{{obju.status}}</td>
+                <th><button class="btn btn-primary" type="submit" ng-click="Dodelete(obju.Email);">Delete</button></th>
+                <th><button class="btn btn-primary" type="submit" ng-click="Doblock(obju.Email);">Block</button></th>
+                <th><button class="btn btn-primary" type="submit" ng-click="Doresume(obju.Email);">Resume</button></th>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

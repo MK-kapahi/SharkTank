@@ -1,0 +1,82 @@
+body
+{
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  background-size: contain;
+}
+h3
+{
+  font-size: 50px;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px #0000FF;
+}
+
+btnn
+{
+  margin-top: 10px;
+}
+.con2
+{
+  width: 1200px;
+  height: 1050px;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.child-con2
+{
+  width: 1250px;
+  height: 950px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  /* border: 5px solid black; */
+  border-radius: 50px 50px 50px 50px;
+  background-size: cover;
+  background-color:rgb(242, 232, 232);
+  padding-left: 60px;
+  /* box-shadow: 0px 0px 5px 8px rgb(238, 255, 235), 0px 0px 30px 8px rgb(248, 168, 168); */
+}
+.row-2
+{
+  margin: 15px;
+  
+}
+.top
+{
+  width: inherit;
+  height: 100px;
+  margin: auto;
+  padding-left: 50px;
+  margin-top: 20px;
+}
+
+input
+{
+  width:500px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input[type=file]
+{
+  border-radius: 0;
+  margin: 0px;
+}
+
+.file
+{
+  width: 400px;
+  height: 30px;
+  background-color: white;
+}
+.line
+{
+    width: 800px;
+    height: 10px;
+    color: rgb(255, 0, 0);
+}
+.img {
+  border-radius: 50%;
+}

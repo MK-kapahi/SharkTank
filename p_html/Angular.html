@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/angular.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/angular.min.js"></script>
+    <script>
+        var mymodule=angular.module("MModule",[]);
+        var controller =mymodule.controller("MController",function($scope){
+            $scope.doHello=function()
+            {
+                alert("Hello user");
+            }
+
+            $scope.fname;
+            $scope.lname;
+            $scope.fullname="";
+            $scope.dojoin=function()
+            {
+               $scope.fullname =$scope.fname+" "+$scope.lname;
+            }
+
+            $scope.jsonAry=
+            [
+                {uid:"101", name:" Aman"},
+                {uid:"102", name:" Raman"},
+                {uid:"103", name:" Daman"},
+                {uid:"104", name:" Chaman"},
+                {uid:"105", name:" baman"}
+            ]
+
+            $scope.dodel=function(uid1,index)
+            {
+                alert(uid1+" will be deleted");
+                $scope.jsonAry.splice(index,1);
+            }
+        })
+    </script>
+</head>
+<body ng-app="MModule" ng-controller="MController">
+    <!-- <input type="button" value="Click" ng-click="doHello();">
+    <p>
+        <input type="text" name="" id="" ng-model="fname">
+        {{fname}}
+    </p> -->
+
+    <input type="text" name="" id="" ng-model="fname">
+    <input type="text" name="" id="" ng-model="lname">
+    <input type="button" value="Click" ng-click="dojoin();">
+    <input type="text" name="" id="" ng-model="fullname">
+    <p>
+    </p>
+    <p>
+        <center>
+            <table width="500" border="2">
+             <tr>
+                 <th>Sr.</th>
+                 <th>UID</th>
+                 <th>Name</th>
+             </tr>
+             <tr ng-repeat="obj in jsonAry">
+            <td> {{$index}} </td>
+            <td> {{obj.uid}} </td>
+            <td> {{obj.name}} </td>
+            <th>
+                <input type="button" value="Delete" ng-click="dodel(obj.uid,$index);">
+            </th>
+             </tr>
+            </table>
+        </center>
+    </p>
+</body>
+</html>
